@@ -31,7 +31,6 @@ self.addEventListener('install', function(event) {
 				'/inbox-attack/index.html',
 				'/inbox-attack/index.html?home=true',
 				'/inbox-attack/?home=true',
-				'/inbox-attack/screen.css',
 				'/inbox-attack/index.svg'
 			]).then(function() {
 				return self.skipWaiting();
@@ -47,6 +46,7 @@ self.addEventListener('activate', function(event) {
 self.addEventListener('fetch', function(event) {
 	event.respondWith(
 		caches.match(event.request).then(function(response) {
+			console.log(`response`, response, `event.request`, event.request);
 			return response || fetch(event.request);
 		})
 	);
